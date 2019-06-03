@@ -1,0 +1,210 @@
+<html lang="en">
+  <head>
+    <title>QuickStopPro</title>
+    <meta charset="UTF-8" />
+    <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    
+    <!-- app icons -->
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/apple-touch-icon.png">
+    <link rel="icon" sizes="120x120 32x32 16x16" href="assets/campingcar.png">
+    <link rel="manifest" href="assets/manifest.json">
+    <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" href="assets/campingcar.ico" sizes="16x16 32x32" type="image/vnd.microsoft.icon">
+    
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    
+    <!-- Font awsome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  
+    <!-- My CSS -->
+    <link rel="stylesheet" type="text/css" href="css/qs_main.css">
+    
+  </head>
+  
+  <body>
+    
+    <!-- Menu -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="navbar navbar-inverse">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">QuickStopPro</a>
+            </div>
+
+            <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><button type="button" class="btn-link btn-lg" data-toggle="modal" data-target="#addpoi"><i class="fa fa-plus" aria-hidden="true"></i> Add Poi</button></li>
+              <li><button type="button" class="btn-link btn-lg" data-toggle="modal" data-target="#settings"><i class="fa fa-sliders" aria-hidden="true"></i> Settings</button></li>
+              <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i>Search</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    
+    <!-- Allerts -->
+    <div class="container">
+      <div id="alert_success" class="alert alert-success" hidden=true>
+         <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Success!</strong> <p class="alertMsg">
+      </div>
+      
+      <div id="alert_info" class="alert alert-info" hidden=true>
+         <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Info!</strong> <p class="alertMsg">
+      </div>
+      
+      <div id="alert_warning" class="alert alert-warning" hidden=true>
+         <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Warning!</strong> <p class="alertMsg">
+      </div>
+      
+      <div id="alert_danger" class="alert alert-danger" hidden=true>
+         <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Danger!</strong> <p class="alertMsg">
+      </div>
+    </div>
+    
+    <!-- Main -->
+    <div class="container-fluid fill">
+      <div class="row">
+        <div id="search_canvas" hidden=true><input id="pac-input" class="controls" type="search" placeholder="" /></div>
+        <div id="map_canvas" style="width:100%; height:100%;" align="center" hidden=true></div>
+        <div id="street_canvas" style="width:100%; height:100%;" align="center" hidden=true></div>
+       
+        <!-- Modal AddPOI -->
+        <div id="addpoi" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Poi:</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="name" class="form-control" id="name">
+                  </div>
+                  <div class="form-group">
+                    <label for="desc">Description:</label>
+                    <input type="desc" class="form-control" id="desc">
+                  </div>
+                  <div class="form-group">
+                    <label for="adress">Adress:</label>
+                    <input type="adress" class="form-control" id="adress">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email">
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="phone" class="form-control" id="phone">
+                  </div>
+                  <div class="form-group">
+                    <label for="gps">GPS:</label>
+                    <input type="gps" class="form-control" id="gps">
+                  </div>
+                  <div class="fileupload fileupload-new" data-provides="fileupload">
+                    <div class="fileupload-preview thumbnail" style="width: 200px; height: 150px;"></div>
+                    <div>
+                      <span class="btn btn-file">
+                        <span class="fileupload-new">Select image</span>
+                        <span class="fileupload-exists">Change</span>
+                        <input type="file" />
+                      </span>
+                      <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                    </div>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox"><i class="fa fa-glass" aria-hidden="true"></i> Water</label>
+                    <label><input type="checkbox"><i class="fa fa-trash" aria-hidden="true"></i> Trash</label>
+                    <label><input type="checkbox"><i class="fa fa-download" aria-hidden="true"></i> Greywaterdump</label>
+                    <label><input type="checkbox"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Blackwaterdump</label>
+                    <label><input type="checkbox"><i class="fa fa-female" aria-hidden="true"></i><i class="fa fa-male" aria-hidden="true"></i> WC</label>
+                    <label><input type="checkbox"><i class="fa fa-tint" aria-hidden="true"></i> Duch</label>
+                    <label><input type="checkbox"><i class="fa fa-wifi" aria-hidden="true"></i> WiFi</label>
+                    <label><input type="checkbox"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping</label>
+                    <label><input type="checkbox"><i class="fa fa-cutlery" aria-hidden="true"></i> Restaurant</label>
+                    <label><input type="checkbox"><i class="fa fa-money" aria-hidden="true"></i> Not free</label>
+                    <label><input type="checkbox"><i class="fa fa-wheelchair" aria-hidden="true"></i> Disabled</label>
+                    <label><input type="checkbox"><i class="fa fa-tree" aria-hidden="true"></i> Nature</label>
+                    <label><input type="checkbox"><i class="fa fa-child" aria-hidden="true"></i> Playground</label>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="SaveNew" class="btn btn-default" data-dismiss="modal">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+      <!-- Modal Settings -->
+      <div id="settings" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+        <!-- Modal content-->
+          <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Settings</h4>
+              </div>
+              <div class="modal-body">
+                <p>Some text in the modal.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+    <!-- My code -->
+    <script type="text/javascript" src="js/qs_HTTPUtils.js"></script>
+    <script type="text/javascript" src="js/qs_kmlparser.js"></script>
+    <script type="text/javascript" src="js/qs_helper.js"></script>
+    <script type="text/javascript" src="js/qs_main.js"></script>
+  
+    <!-- Google maps api -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDANDy-qMpsDGb0knwTP_WZZFig66aJaKU&libraries=weather,places&callback=initialize"></script>
+      
+    <script>
+      $(document).ready(function(){
+          $("#gps").val("23423423,234234");
+          
+          
+          $("#SaveNew").click(function(){
+              $("#alert_success").show();
+          });
+          
+          $("#Editpoi").click(function(){
+              $("#Editpoi").show();
+          });
+      });
+    </script>
+  </body>
+</html>
